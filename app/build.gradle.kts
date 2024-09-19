@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
+    kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
 
@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -69,15 +69,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+
     implementation("com.google.dagger:hilt-android:2.52")
-    ksp("com.google.dagger:hilt-compiler:2.52")
+    kapt("com.google.dagger:hilt-android-compiler:2.52")
 
-    // For instrumentation tests
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.52")
-    kspAndroidTest("com.google.dagger:hilt-compiler:2.52")
+    val nav_version = "2.8.0"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    // For local unit tests
-    testImplementation("com.google.dagger:hilt-android-testing:2.52")
-    kspTest("com.google.dagger:hilt-compiler:2.52")
+}
 
+kapt {
+    correctErrorTypes = true
 }
