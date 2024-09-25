@@ -27,6 +27,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.akashgupta.livechat.CheckedSignedIn
+import com.akashgupta.livechat.CommonProgressBar
 import com.akashgupta.livechat.DestinationScreen
 import com.akashgupta.livechat.LCViewModel
 import com.akashgupta.livechat.R
@@ -36,6 +38,8 @@ import com.akashgupta.livechat.ui.theme.purple
 
 @Composable
 fun SignUpScreen(navController: NavController, viewModel: LCViewModel) {
+
+    CheckedSignedIn(viewModel, navController)
 
     Box(modifier = Modifier.fillMaxSize().background(color = Color.White)) {
         Column(
@@ -127,6 +131,10 @@ fun SignUpScreen(navController: NavController, viewModel: LCViewModel) {
                     }
             )
         }
+    }
+
+    if (viewModel.inProcess.value) {
+        CommonProgressBar()
     }
 
 }
